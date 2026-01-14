@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import re
 
 grid = []
 
@@ -18,5 +19,22 @@ def display():
         print(str(8-i)+" "+str(grid[i]))
     print("   A  B  C  D  E  F  G  H") 
 
+def interpretInput(usrInput):
+    usrInput = usrInput.replace(" ","")
+    match = re.search("^[A-H][,-;:_]*[1-8]$", usrInput)
+    if match==None:
+        return -1
+    char = (re.search("[A-H]",usrInput)).group()
+    num = (re.search("[1-8]", usrInput)).group()
+    return [char,num]
+
 setup()
-display()
+gameOver = False
+player = 1
+while gameOver==False:
+    display()
+    usrInput = input("where would you like to place?\n")
+    position = interpretInput(usrInput)
+    if position==-1:
+        print("======Invalid input======")
+        continue
