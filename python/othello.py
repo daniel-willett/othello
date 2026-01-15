@@ -44,7 +44,16 @@ def makeMove(position):
         print("This position is already taken. Please choose an empty position")
         player -= 1 #The next step is to increment it to the next player but we want the current player to try again
     else:
-        grid[y][x]=player
+        if isLegal(x,y,player)==False:
+            print("This is not a legal play")
+            player -= 1 #Same reason as a couple lines before
+        else:
+            #grid[y][x]=player
+            #Also need something else like an actual move being 'played' so perhaps just combine? That's a future problem. For now we work on `isLegal`
+
+def isLegal(x,y,player):
+    #We're going to check N, NE, E, SE, S, SW, W, NW
+    opponent = (player%2)+1
 
 #Initialise
 grid = []
